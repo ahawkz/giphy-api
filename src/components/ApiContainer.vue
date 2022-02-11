@@ -1,16 +1,33 @@
 <template>
-  <div class="hello">
+  <div class="api-container">
     <h1>{{ msg }}</h1>
+    <!-- use v-model directive for two-way data binding -->
+    <input type="text" v-model="userInput">
+    <button @click="searchGifs">Go</button>
   </div>
 </template>
 
 <script>
-export default {
-  name: 'ApiContainer',
-  props: {
-    msg: String
-  }
-}
+  // import axios from "axios";
+
+  export default {
+    name: 'ApiContainer',
+    props: {
+      msg: String
+    },
+    //function called data that returns an object
+    data(){
+      return {
+        userInput: 'hello'
+      };
+    },
+    methods: {
+      searchGifs() {
+        console.log('searchin for gifs');
+        console.log(this.userInput);
+      }
+    }
+ }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
