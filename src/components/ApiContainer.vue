@@ -1,13 +1,13 @@
 <template>
   <section class="api-container">
     <h1 tabindex="0">{{ msg }}</h1>
-    <p class="overline" tabindex="0">like searching for gifs</p>
+    <p class="overline italic" tabindex="0">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
-    <input type="text" v-model.trim="userInput" placeholder="taylor swift">
+    <input type="text" @keyup.enter="searchGifs" v-model.trim="userInput" placeholder="taylor swift">
     <!-- prevent modifier prevents default submission behaivor -->
     <button @click.prevent="searchGifs" type="button">Search</button>
 
-    <div class="error-messages">
+    <div v-if="inputError || apiErrorMsg" class="error-messages">
       <p v-if="inputError" class="red uppercase" tabindex="0">{{inputErrorMsg}}</p>
       <p v-if="apiErrorMsg" class="red uppercase" tabindex="0">Error: {{apiErrorMsg}}</p>
     </div>
@@ -16,10 +16,10 @@
       <!-- gif cards displayed using v-for directive -->
       <div class="gif-card" v-for="gif in gifs" :key="gif.id">
         <img 
-          :src="gif.images.fixed_height_small.url" 
+          :src="gif.images.fixed_width.url" 
           :alt="gif.title"
         />
-        <p>Share {{gif.url}}</p>
+        <p>Share: <a href="{{gif.url}}">{{gif.url}}</a></p>
       </div>
     </div> 
   </section>
@@ -91,6 +91,7 @@
 <style scoped lang="scss">
   @import "../scss/_variables.scss";
   @import "../scss/_typography.scss";
+  @import "../scss/_buttons.scss";
 
   .api-container {
     margin-top: 10%;
@@ -102,10 +103,21 @@
       }
     }
 
+    .overline {
+      margin-bottom: 32px;
+    }
+
     input[type="text"] {
       font-family: $primary-font;
       letter-spacing: 0.5px;
-      padding: 5px;
+      padding: 11px 10px 9px;
+      border: 1px solid $red;
+      width: 50%;
+
+      @media (min-width: $tablet) {
+        width: 40%;
+        padding: 11px 43px 9px 10px;
+      }
     }
 
     .gif-container {
@@ -114,17 +126,23 @@
       justify-content: center;
       @media (min-width: $desktop) {
         padding: 100px;
+        max-width: 1000px;
+        margin: 0 auto;
       }
-
     }
 
     .gif-card {
       width: 100%;
       border: 1px solid green;
-      border-radius: 10%;
       
       @media (min-width: $desktop) {
-        width: 33%;
+        width: 30%;
+        margin: 10px;
+      }
+
+      img {
+        width: 100%;
+        object-fit: contain;
       }
     }
   }

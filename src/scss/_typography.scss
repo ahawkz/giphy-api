@@ -25,8 +25,8 @@ h1 {
     font-family: $secondary-font;
     color: $purple;
     font-weight: 100;
-    font-size: 13px;
-    letter-spacing: 0.3px;
+    font-size: 14px;
+    letter-spacing: 0.5px;
     text-transform: uppercase;
     margin: 0 0 10px 0;
 
@@ -34,16 +34,19 @@ h1 {
         font-size: 1rem;
     }
     @media (min-width: $desktop) {
-        font-size: 1.2rem;
+        font-size: 1.4rem;
     }
 }
 
 // utility classes
-
 .red {
     color: $red;
 }
 
 .uppercase {
     text-transform: uppercase;
+}
+
+.italic {
+    font-style: italic;
 }

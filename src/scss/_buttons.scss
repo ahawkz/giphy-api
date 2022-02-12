@@ -1,0 +1,20 @@
+button {
+    padding: 10px 43px;
+    color: $cream;
+    background: $red;
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1;
+    letter-spacing: 0.8px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: center;
+    font-family: $primary-font;
+    border: 1px solid $red;
+    transition: 0.3s all;
+
+    &:hover {
+        background: $purple;
+        border: 1px solid $purple;
+    }
+}
