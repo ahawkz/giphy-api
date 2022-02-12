@@ -3,12 +3,12 @@
     <h1>{{ msg }}</h1>
     <!-- use v-model directive for two-way data binding -->
     <input type="text" v-model="userInput">
-    <button @click="searchGifs">Go</button>
+    <button @click="searchGifs" type="button">Go</button>
   </div>
 </template>
 
 <script>
-  // import axios from "axios";
+  import axios from "axios";
 
   export default {
     name: 'ApiContainer',
@@ -23,8 +23,15 @@
     },
     methods: {
       searchGifs() {
-        console.log('searchin for gifs');
-        console.log(this.userInput);
+        let APIkey = '2smyGBe8j335aBYmZqyRtcDIO6c0ff5B';
+        let url = 'https://api.giphy.com/v1/gifs/search?api_key=' + APIkey + '&q=';
+        let apiLink = url + this.userInput;
+
+        axios
+          .get(apiLink)
+          .then((response) => {
+            console.log(response);
+          })
       }
     }
  }
