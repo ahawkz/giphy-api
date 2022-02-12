@@ -1,12 +1,17 @@
 <template>
-  <div class="api-container">
-    <h1>{{ msg }}</h1>
-    <p class="overline">like searching for gifs</p>
+  <section class="api-container">
+    <h1 tabindex="0">{{ msg }}</h1>
+    <p class="overline" tabindex="0">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
     <input type="text" v-model.trim="userInput" placeholder="taylor swift">
     <!-- prevent modifier prevents default submission behaivor -->
     <button @click.prevent="searchGifs" type="button">Search</button>
-    <p v-if="inputError" class="red uppercase">{{inputErrorMsg}}</p>
+
+    <div class="error-messages">
+      <p v-if="inputError" class="red uppercase" tabindex="0">{{inputErrorMsg}}</p>
+      <p v-if="apiErrorMsg" class="red uppercase" tabindex="0">Error: {{apiErrorMsg}}</p>
+    </div>
+
     <div class="gif-container">
       <!-- gif cards displayed using v-for directive -->
       <div class="gif-card" v-for="gif in gifs" :key="gif.id">
@@ -17,7 +22,7 @@
         <p>Share {{gif.url}}</p>
       </div>
     </div> 
-  </div>
+  </section>
 </template>
 
 <script>
@@ -34,7 +39,8 @@
         userInput: '',
         gifs: [],
         inputError: false,
-        inputErrorMsg: '*Input Required'
+        inputErrorMsg: '*Input Required',
+        apiErrorMsg: ''
       };
     },
     methods: {
@@ -43,30 +49,32 @@
         let url = 'https://api.giphy.com/v1/gifs/search?api_key=' + APIkey + '&limit=13&rating=pg-13&&lang=en&q=';
         let apiLink = url + this.userInput;
 
-        if(!this.userInput) {
+        if(!this.userInput && this.userInput) {
           this.inputError = true;
         } else {
           this.inputError = false;
           axios
             .get(apiLink)
             .then((response) => {
-
               this.gifs = response.data.data;
-
+              if (this.gifs < 1) {
+                this.apiErrorMsg = "Nothing Found";
+              }
+              console.log("META", response.data.meta);
               console.log(response.data.data);
-              console.log(response.data.status);
             })
             .catch((error) => {
-              console.log(error);
+              console.log("error", error);
+
               if(error.response) {
-                console.log(error.response)
                 // client received an error response 
-                // show a 404 not found if returns a 404
-                // show different error message if 5xx or nothing
+                console.log("error response", error.response)
+                this.apiErrorMsg = error.response.data.meta.msg;
               } else if (error.request) {
-                console.log(error.request)
                 // client never received a response
                 // usually responds with a network error 
+                console.log("error request", error.request)
+                this.apiErrorMsg = "Network Error";
               } else {
                 // error is likely not coming from axios
                 console.log(error);
