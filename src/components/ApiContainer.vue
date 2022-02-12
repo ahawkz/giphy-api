@@ -3,8 +3,10 @@
     <h1>{{ msg }}</h1>
     <p class="overline">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
-    <input type="text" v-model.trim="userInput">
-    <button @click="searchGifs" type="button">Search</button>
+    <input type="text" v-model.trim="userInput" placeholder="taylor swift">
+    <!-- prevent modifier prevents default submission behaivor -->
+    <button @click.prevent="searchGifs" type="button">Search</button>
+    <p v-if="inputError" class="red uppercase">{{inputErrorMsg}}</p>
     <div class="gif-container">
       <!-- gif cards displayed using v-for directive -->
       <div class="gif-card" v-for="gif in gifs" :key="gif.id">
@@ -14,14 +16,12 @@
         />
         <p>Share {{gif.url}}</p>
       </div>
-
-    </div>
+    </div> 
   </div>
 </template>
 
 <script>
-  import axios from "axios"; 
-  //promise-based http client that works in the browser and node 
+  import axios from "axios";  //promise-based http client that works in the browser and node 
 
   export default {
     name: 'ApiContainer',
@@ -31,8 +31,10 @@
     //function called data that returns an object
     data(){
       return {
-        userInput: 'taylor swift',
-        gifs: []
+        userInput: '',
+        gifs: [],
+        inputError: false,
+        inputErrorMsg: '*Input Required'
       };
     },
     methods: {
@@ -41,15 +43,37 @@
         let url = 'https://api.giphy.com/v1/gifs/search?api_key=' + APIkey + '&limit=13&rating=pg-13&&lang=en&q=';
         let apiLink = url + this.userInput;
 
-        axios
-          .get(apiLink)
-          .then((response) => {
-            console.log(response.data.data);
-            this.gifs = response.data.data;
-          })
-          .catch((error) => {
-            console.log(error);
-          })
+        if(!this.userInput) {
+          this.inputError = true;
+        } else {
+          this.inputError = false;
+          axios
+            .get(apiLink)
+            .then((response) => {
+
+              this.gifs = response.data.data;
+
+              console.log(response.data.data);
+              console.log(response.data.status);
+            })
+            .catch((error) => {
+              console.log(error);
+              if(error.response) {
+                console.log(error.response)
+                // client received an error response 
+                // show a 404 not found if returns a 404
+                // show different error message if 5xx or nothing
+              } else if (error.request) {
+                console.log(error.request)
+                // client never received a response
+                // usually responds with a network error 
+              } else {
+                // error is likely not coming from axios
+                console.log(error);
+              }
+            })
+            this.userInput = '';
+          }
       }
     }
  }

@@ -23,7 +23,7 @@ h1 {
 
 .overline {
     font-family: $secondary-font;
-    color: $green;
+    color: $purple;
     font-weight: 100;
     font-size: 13px;
     letter-spacing: 0.3px;
@@ -36,4 +36,14 @@ h1 {
     @media (min-width: $desktop) {
         font-size: 1.2rem;
     }
+}
+
+// utility classes
+
+.red {
+    color: $red;
+}
+
+.uppercase {
+    text-transform: uppercase;
 }
