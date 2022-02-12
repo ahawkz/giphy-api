@@ -13,12 +13,19 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
+<!-- not scoped -->
+<style lang="scss">
+  @import "./scss/_variables.scss";
+  @import "./scss/_typography.scss";
+// initial css from vue 3 template
+  #app {
+    font-family: Avenir, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-align: center;
+  }
+
+  html {
+    background-color: $cream;
+  }
 </style>

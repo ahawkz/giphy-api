@@ -1,0 +1,39 @@
+body, p, a, .overline {
+    font-family: $primary-font;
+}
+
+h1, h2, h3, h4, h5 {
+    font-family: $secondary-font;
+    letter-spacing: 0.5px;
+}
+
+h1 {
+    font-size: 2rem;
+    letter-spacing: 0.5px;
+    color: $red;
+    @media (min-width: $tablet) {
+        font-size: 3rem;
+        letter-spacing: 1px;
+    }
+    @media (min-width: $desktop) {
+        font-size: 4rem;
+        letter-spacing: 2px;
+    }
+}
+
+.overline {
+    font-family: $secondary-font;
+    color: $green;
+    font-weight: 100;
+    font-size: 13px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+    margin: 0 0 10px 0;
+
+    @media (min-width: $tablet) {
+        font-size: 1rem;
+    }
+    @media (min-width: $desktop) {
+        font-size: 1.2rem;
+    }
+}

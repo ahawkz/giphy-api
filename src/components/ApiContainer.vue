@@ -6,6 +6,7 @@
     <input type="text" v-model.trim="userInput">
     <button @click="searchGifs" type="button">Search</button>
     <div class="gif-container">
+      <!-- gif cards displayed using v-for directive -->
       <div class="gif-card" v-for="gif in gifs" :key="gif.id">
         <img 
           :src="gif.images.fixed_height_small.url" 
@@ -56,16 +57,43 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+  @import "../scss/_variables.scss";
+  @import "../scss/_typography.scss";
+
   .api-container {
-    margin-top: 100px;
+    margin-top: 10%;
 
     h1 {
-    margin: 0;
+      margin: 10px;
+      @media (min-width: $desktop) {
+        margin: 0;
+      }
     }
 
-    .overline {
-      text-transform: uppercase;
-      margin-top: 0;
+    input[type="text"] {
+      font-family: $primary-font;
+      letter-spacing: 0.5px;
+      padding: 5px;
+    }
+
+    .gif-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      @media (min-width: $desktop) {
+        padding: 100px;
+      }
+
+    }
+
+    .gif-card {
+      width: 100%;
+      border: 1px solid green;
+      border-radius: 10%;
+      
+      @media (min-width: $desktop) {
+        width: 33%;
+      }
     }
   }
 </style>
