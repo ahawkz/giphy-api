@@ -6,18 +6,21 @@
     <input type="text" v-model.trim="userInput">
     <button @click="searchGifs" type="button">Search</button>
     <div class="gif-container">
-      <img 
-        v-for="gif in gifs" 
-        :key="gif.id" 
-        :src="gif.images.fixed_height_small.url" 
-      />
-      <p v-for="g in gifs" :key="g.id">Share {{g.url}}</p>
+      <div class="gif-card" v-for="gif in gifs" :key="gif.id">
+        <img 
+          :src="gif.images.fixed_height_small.url" 
+          :alt="gif.title"
+        />
+        <p>Share {{gif.url}}</p>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-  import axios from "axios";
+  import axios from "axios"; 
+  //promise-based http client that works in the browser and node 
 
   export default {
     name: 'ApiContainer',
@@ -52,19 +55,17 @@
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
+<style scoped lang="scss">
+  .api-container {
+    margin-top: 100px;
 
-.api-container {
-  margin-top: 100px;
-}
+    h1 {
+    margin: 0;
+    }
 
-h1 {
-  margin: 0;
-}
-
-.overline {
-  text-transform: uppercase;
-  margin-top: 0;
-}
-
+    .overline {
+      text-transform: uppercase;
+      margin-top: 0;
+    }
+  }
 </style>
