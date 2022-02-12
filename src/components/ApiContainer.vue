@@ -1,10 +1,18 @@
 <template>
   <div class="api-container">
     <h1>{{ msg }}</h1>
+    <p class="overline">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
     <input type="text" v-model.trim="userInput">
-    <button @click="searchGifs" type="button">Go</button>
-    <img v-for="gif in gifs" :key="gif.id" :src="gif.images.fixed_height_small.url" />
+    <button @click="searchGifs" type="button">Search</button>
+    <div class="gif-container">
+      <img 
+        v-for="gif in gifs" 
+        :key="gif.id" 
+        :src="gif.images.fixed_height_small.url" 
+      />
+      <p v-for="g in gifs" :key="g.id">Share {{g.url}}</p>
+    </div>
   </div>
 </template>
 
@@ -19,20 +27,20 @@
     //function called data that returns an object
     data(){
       return {
-        userInput: 'hello',
+        userInput: 'taylor swift',
         gifs: []
       };
     },
     methods: {
       searchGifs() {
-        console.log(this.userInput, "this is user input")
         let APIkey = '2smyGBe8j335aBYmZqyRtcDIO6c0ff5B';
-        let url = 'https://api.giphy.com/v1/gifs/search?api_key=' + APIkey + '&q=';
+        let url = 'https://api.giphy.com/v1/gifs/search?api_key=' + APIkey + '&limit=13&rating=pg-13&&lang=en&q=';
         let apiLink = url + this.userInput;
 
         axios
           .get(apiLink)
           .then((response) => {
+            console.log(response.data.data);
             this.gifs = response.data.data;
           })
           .catch((error) => {
@@ -45,18 +53,18 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+
+.api-container {
+  margin-top: 100px;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
+
+h1 {
+  margin: 0;
 }
-li {
-  display: inline-block;
-  margin: 0 10px;
+
+.overline {
+  text-transform: uppercase;
+  margin-top: 0;
 }
-a {
-  color: #42b983;
-}
+
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <ApiContainer msg="Giphy API Project"/>
+  <ApiContainer msg="I don't know about you, but I'm feeling"/>
 </template>
 
 <script>
@@ -20,6 +20,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
