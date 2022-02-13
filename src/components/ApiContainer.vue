@@ -100,7 +100,8 @@
   @import "../scss/_buttons.scss";
 
   .api-container {
-    margin-top: 10%;
+    padding-top: 10%;
+    flex: 1 0 auto;
 
     h1 {
       margin: 10px;
