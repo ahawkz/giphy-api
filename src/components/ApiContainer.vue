@@ -6,12 +6,12 @@
     <input type="text" @keyup.enter="searchGifs" v-model.trim="userInput" placeholder="taylor swift">
     <!-- prevent modifier prevents default submission behaivor -->
     <button @click.prevent="searchGifs" type="button">Search</button>
-
+    <!-- error messaging -->
     <div v-if="inputError || apiErrorMsg" class="error-messages">
       <p v-if="inputError" class="red uppercase" tabindex="0">{{inputErrorMsg}}</p>
-      <p v-if="apiErrorMsg" class="red uppercase" tabindex="0">Error: {{apiErrorMsg}}</p>
+      <p v-if="apiErrorMsg" class="red uppercase" tabindex="0">{{apiErrorMsg}}</p>
     </div>
-
+    <!-- gif container -->
     <div class="gif-container">
       <!-- gif cards displayed using v-for directive -->
       <div class="gif-card" v-for="gif in gifs" :key="gif.id">
@@ -19,7 +19,7 @@
           :src="gif.images.fixed_width.url" 
           :alt="gif.title"
         />
-        <p>Share: <a href="{{gif.url}}">{{gif.url}}</a></p>
+        <!-- <p>Share: <a href="{{gif.url}}">{{gif.url}}</a></p> -->
       </div>
     </div> 
   </section>
@@ -58,10 +58,10 @@
             .then((response) => {
               this.gifs = response.data.data;
               if (this.gifs < 1) {
-                this.apiErrorMsg = "Nothing Found";
-              }
-              console.log("META", response.data.meta);
-              console.log(response.data.data);
+                this.apiErrorMsg = "Nothing Found, Please enter your search in the box above";
+              } 
+              // console.log("META", response.data.meta);
+              // console.log(response.data.data);
             })
             .catch((error) => {
               console.log("error", error);
@@ -81,6 +81,8 @@
               }
             })
             this.userInput = '';
+            this.apiErrorMsg = null; // reset error msg after
+            this.inputError = null;  // searching for new item
           }
       }
     }
@@ -121,28 +123,30 @@
     }
 
     .gif-container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      @media (min-width: $desktop) {
-        padding: 100px;
-        max-width: 1000px;
-        margin: 0 auto;
+      column-count: 2;
+      margin: 40px auto;
+      padding: 20px;
+      @media (min-width: $tablet){ 
+        column-count: 3;
+        max-width: 650px;
       }
-    }
-
-    .gif-card {
-      width: 100%;
-      border: 1px solid green;
-      
       @media (min-width: $desktop) {
-        width: 30%;
-        margin: 10px;
+        column-count: 4;
+        max-width: 900px;
       }
 
-      img {
-        width: 100%;
-        object-fit: contain;
+      .gif-card {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        break-inside: avoid; /* IE 10+ */
+        gap: 10px;
+        -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
+        page-break-inside: avoid; /* Firefox */
+
+        img {
+          width: 100%;
+          display: block;
+        }
       }
     }
   }
