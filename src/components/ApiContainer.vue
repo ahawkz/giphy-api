@@ -58,6 +58,7 @@
           this.inputError = true;
         } else {
           this.inputError = false;
+
           axios
             .get(apiLink)
             .then((response) => {
@@ -65,8 +66,6 @@
               if (this.gifs < 1) {
                 this.apiErrorMsg = "Nothing Found, Please enter your search in the box above";
               } 
-              // console.log("META", response.data.meta);
-              console.log(response.data.data);
             })
             .catch((error) => {
               console.log("error", error);
