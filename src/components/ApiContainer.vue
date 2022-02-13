@@ -3,7 +3,7 @@
     <h1 tabindex="0">{{ msg }}</h1>
     <p class="overline italic" tabindex="0">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
-    <input type="text" @keyup.enter="searchGifs" v-model.trim="userInput" placeholder="taylor swift">
+    <input type="text" @keyup.enter="searchGifs" v-model.trim="userInput" placeholder="e.g. taylor swift">
     <!-- prevent modifier prevents default submission behaivor -->
     <button @click.prevent="searchGifs" type="button">Search</button>
     <!-- error messaging -->
@@ -19,7 +19,7 @@
           :src="gif.images.fixed_width.url" 
           :alt="gif.title"
         />
-        <!-- <p>Share: <a href="{{gif.url}}">{{gif.url}}</a></p> -->
+        <p class="share"><a href="{{gif.url}}">Share</a></p>
       </div>
     </div> 
   </section>
@@ -131,7 +131,7 @@
         max-width: 650px;
       }
       @media (min-width: $desktop) {
-        column-count: 4;
+        column-count: 3;
         max-width: 900px;
       }
 
@@ -142,10 +142,48 @@
         gap: 10px;
         -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
         page-break-inside: avoid; /* Firefox */
+        padding: 10px 5px;
+        position: relative;
 
         img {
           width: 100%;
           display: block;
+          border-radius: 7px;
+        }
+
+        .share {
+          display: none;
+          position: absolute;
+          bottom: 15px;
+          left: 50%;
+          transform: translate(-50%);
+          background: $red;
+          padding: 5px 15px;
+          &:hover {
+            background: rgba($red, 0.8);
+          }
+
+          a {
+            color: $cream;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-style: italic;
+          }
+
+        }
+
+        &:hover {
+          @media (min-width: $desktop) {
+            img {
+              transition: 0.15s all;
+              box-shadow: 2px 2px 7px 0px rgba($purple, 0.4);
+              transform: scale(1.1);
+            }
+            .share {
+              display: block;
+            }
+          }
         }
       }
     }
