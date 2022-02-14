@@ -18,6 +18,8 @@ To run this project, clone it locally and install npm.
   npm install 
   ```
 
+* If error `code: 'ERR_OSSL_EVP_UNSUPPORTED'` is thrown, `export NODE_OPTIONS=--openssl-legacy-provider` will resolve this issue.
+
 ### Compiles and hot-reloads for development
 ```
 npm run serve
