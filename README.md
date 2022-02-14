@@ -1,7 +1,7 @@
 # I'm Feeling Giphy
 
-## About The Project
-I'm Feeling Giphy is a Taylor Swift-themed gif search engine powered by the Giphy API. Based on user input, the app provides 13 gifs. From there the user can navigate to Giphy by clicking on the gif's link for further interaction.
+## About This Project
+I'm Feeling Giphy is a Taylor Swift-themed gif search engine powered by the Giphy API. Based on user input, the app provides 13 gifs. From there the user can navigate to Giphy by clicking on the gif's link icon for further interaction.
 
 ### Built With
 * [Vue.js](https://vuejs.org/) 
@@ -11,7 +11,7 @@ I'm Feeling Giphy is a Taylor Swift-themed gif search engine powered by the Giph
 * [Axios](https://axios-http.com/docs/intro)
 
 ## Getting Started
-To run this project, install it locally using npm.
+To run this project, clone it locally and install npm.
 
 * npm
   ```sh
