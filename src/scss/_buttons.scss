@@ -12,6 +12,7 @@ button {
     font-family: $primary-font;
     border: 1px solid $red;
     transition: 0.3s all;
+    margin: 0;
 
     &:hover {
         background: $purple;

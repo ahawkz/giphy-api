@@ -100,7 +100,7 @@
   @import "../scss/_buttons.scss";
 
   .api-container {
-    padding-top: 10%;
+    padding-top: 5%;
     flex: 1 0 auto;
 
     h1 {
@@ -139,7 +139,7 @@
       }
       @media (min-width: $desktop) {
         column-count: 3;
-        max-width: 900px;
+        max-width: 1000px;
       }
 
       .gif-card {
@@ -148,11 +148,12 @@
         break-inside: avoid; /* IE 10+ */
         -webkit-column-break-inside: avoid; /* Chrome, Safari, Opera */
         page-break-inside: avoid; /* Firefox */
-        padding: 10px 5px;
+        padding: 10px;
         position: relative;
         
         @media (min-width: $desktop) {
-          gap: 10px;
+          gap: 0px;
+          padding: 15px;
           &:not(:hover, :focus, :active, :focus-visible, :focus-within) {
             .overlay {
               visibility: hidden;
@@ -185,7 +186,7 @@
             border-radius: 50%;
             padding: 5px;
             @media (min-width: $tablet) {
-              margin: 15px 5px;
+              margin: 20px 15px 0;
             }
 
             &:hover {
@@ -198,8 +199,11 @@
           @media (min-width: $desktop) {
             img {
               transition: 0.15s all;
+              -webkit-transition: 0.3s all;
               box-shadow: 2px 2px 7px 0px rgba($purple, 0.4);
+              -webkit-box-shadow: 2px 2px 7px 0px rgba($purple, 0.4);
               transform: scale(1.1);
+              border-radius: 7px;
             }
           }
         }

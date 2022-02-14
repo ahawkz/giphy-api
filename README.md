@@ -12,6 +12,7 @@ I'm Feeling Giphy is a Taylor Swift-themed gif search engine powered by the Giph
 
 ## Getting Started
 To run this project, install it locally using npm.
+It is currently recommended to view this project in Chrome or Edge for best user experience.
 
 * npm
   ```sh
@@ -34,10 +35,11 @@ npm run lint
 ```
 
 ## Ongoing Project Updates
+* Update functionality and accessibility across browsers
 * Mobile UI upgrades
 * Copy link to clipboard instead of directing user away from app
 * Use font awesome for icons instead of svg
-* Updating axios call to use async/await 
+* Update axios call to use async/await 
 * Further code split 
 * Incorporate animations
 * Improve page performance
