@@ -1,15 +1,18 @@
 <template>
-  <ApiContainer msg="I don't know about you, but I'm feeling"/>
+  <Header msg="I don't know about you, but I'm feeling"/>
+  <ApiContainer/>
   <Footer />
 </template>
 
 <script>
 import ApiContainer from './components/ApiContainer.vue';
 import Footer from './components/Footer.vue';
+import Header from './components/Header.vue';
 
 export default {
   name: 'App',
   components: {
+    Header,
     ApiContainer,
     Footer
   }

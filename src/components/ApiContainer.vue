@@ -1,7 +1,5 @@
 <template>
   <section class="api-container">
-    <h1 tabindex="0">{{ msg }}</h1>
-    <p class="overline italic" tabindex="0">like searching for gifs</p>
     <!-- use v-model directive for two-way data binding -->
     <input type="text" @keyup.enter="searchGifs" v-model.trim="userInput" placeholder="e.g. taylor swift">
     <!-- prevent modifier prevents default submission behaivor -->
@@ -35,9 +33,6 @@
 
   export default {
     name: 'ApiContainer',
-    props: {
-      msg: String
-    },
     //function called data that returns an object
     data(){
       return {
@@ -100,19 +95,8 @@
   @import "../scss/_buttons.scss";
 
   .api-container {
-    padding-top: 5%;
+    // padding-top: 5%;
     flex: 1 0 auto;
-
-    h1 {
-      margin: 10px;
-      @media (min-width: $desktop) {
-        margin: 0;
-      }
-    }
-
-    .overline {
-      margin-bottom: 32px;
-    }
 
     input[type="text"] {
       font-family: $primary-font;
